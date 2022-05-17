@@ -1,16 +1,16 @@
 const express = require("express");
-// const cors = require("cors");
+const cors = require("cors");
 const usersRoutes = require("./routes/usersRoute");
 const notesRoutes = require("./routes/notesRoute");
 
 const app = express();
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-// var corsOptions = {
-//   origin: "*",
-// };
+var corsOptions = {
+  origin: "*",
+};
 
-// app.use(cors());
+app.use(cors(corsOptions));
 
 const mongoose = require("mongoose");
 const session = require("express-session");
@@ -20,7 +20,7 @@ const sessionSecret = "Haeun Park";
 
 var dbURL =
   process.env.MONGO_URL ||
-  "mongodb+srv://haeunpark:8812@cluster0.7jtnv.mongodb.net/test"; // insert your database URL here
+  "mongodb+srv://cse316final:1234567890@cse316final.oxq7w.mongodb.net/test"; // insert your database URL here
 mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
@@ -40,18 +40,14 @@ const sessionConfig = {
   resave: false,
   saveUninitialized: true,
   cookie: {
-    // secure: true,
+    secure: true,
     httpOnly: true,
+    samesite: "none",
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
     // later you would want to add: 'secure: true' once your website is hosted on HTTPS.
   },
 };
-
-// if (app.get("env") === "production") {
-//   app.set("trust proxy", 1); // trust first proxy
-//   sessionConfig.cookie.secure = true; // serve secure cookies
-// }
 
 app.use(session(sessionConfig));
 

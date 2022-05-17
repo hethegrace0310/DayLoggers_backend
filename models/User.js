@@ -15,13 +15,16 @@ var UserSchema = new Schema({
     trim: true,
     unique: true,
   },
-  colorScheme: { type: String, enum: ["Light", "Dark"] },
+  // colorScheme: { type: String, enum: ["Light", "Dark"] },
   password: {
     type: String,
     required: true,
     minlength: 6,
   },
   profileImage: {
+    type: String,
+  },
+  address: {
     type: String,
   },
 });

@@ -104,8 +104,8 @@ router.post(
       email,
       password,
       name,
-      colorScheme: "Light",
       profileImage: "",
+      address: "",
     });
     await user.save();
     req.session.userId = user._id;
