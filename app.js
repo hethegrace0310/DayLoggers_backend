@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const usersRoutes = require("./routes/usersRoute");
-const notesRoutes = require("./routes/notesRoute");
+// const notesRoutes = require("./routes/notesRoute");
+const questionRoute = require("./routes/questionRoute");
 
 const app = express();
 const bodyParser = require("body-parser");
@@ -61,7 +62,8 @@ app.use((req, res, next) => {
 });
 
 app.use("/api", usersRoutes);
-app.use("/api", notesRoutes);
+// app.use("/api", notesRoutes);
+app.use("/api", questionRoute);
 
 app.use((err, req, res, next) => {
   console.log("Error handling called " + err);
