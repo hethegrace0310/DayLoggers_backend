@@ -31,6 +31,7 @@ router.get(
     // console.log(req);
     const id = req.session.userId; //쿠키에 들어 있ㅡ seesion key를 기반으로 session에서 user id 가져옴
     // console.log(req);
+    if (!id) res.sendStatus(403);
     if (mongoose.isValidObjectId(id)) {
       //id가 mongoose에서 valid한지 검사
       const user = await User.findById(id);
@@ -38,11 +39,14 @@ router.get(
         res.json(user);
         return;
       } else {
-        throw new Error("User Not Found");
+        // throw new Error("User Not Found");
+        res.sendStatus(404);
       }
     } else {
-      throw new Error("Invalid user Id");
+      // throw new Error("Invalid user Id");
+      res.sendStatus(400);
     }
+    return;
   })
 );
 
