@@ -7,13 +7,11 @@ const questionRoute = require("./routes/questionRoute");
 const app = express();
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-var corsOptions = {
-  origin: [
-    "http://localhost:3000",
-    "https://628506e94c2cab2730c7ea4a--meek-boba-7ec9b8.netlify.app",
-    "https://meek-boba-7ec9b8.netlify.app",
-  ],
-};
+const ORIGIN = [
+  "http://localhost:3000",
+  "https://628506e94c2cab2730c7ea4a--meek-boba-7ec9b8.netlify.app",
+  "https://meek-boba-7ec9b8.netlify.app",
+];
 
 app.use(
   cors({
