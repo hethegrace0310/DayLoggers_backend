@@ -21,6 +21,8 @@ app.use(
   })
 );
 
+app.set("trust proxy", 1);
+
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo"); // MongoDB session store
@@ -54,6 +56,8 @@ const sessionConfig = {
     sameSite: "none",
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
+    domain: "https://meek-boba-7ec9b8.netlify.app",
+    path: "/",
     // later you would want to add: 'secure: true' once your website is hosted on HTTPS.
   },
 };
