@@ -7,11 +7,11 @@ const questionRoute = require("./routes/questionRoute");
 const app = express();
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-const ORIGIN = [
-  "http://localhost:3000",
-  "https://628506e94c2cab2730c7ea4a--meek-boba-7ec9b8.netlify.app",
-  "https://meek-boba-7ec9b8.netlify.app",
-];
+
+const ORIGIN =
+  process.env.NODE_ENV === "production"
+    ? "https://meek-boba-7ec9b8.netlify.app"
+    : "http://localhost:3000";
 
 app.use(
   cors({
@@ -67,6 +67,17 @@ app.use(session(sessionConfig));
 app.use((req, res, next) => {
   req.requestTime = Date.now();
   console.log(req.method, req.path);
+  next();
+});
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", ORIGIN);
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
   next();
 });
 
