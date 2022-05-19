@@ -15,7 +15,13 @@ var corsOptions = {
   ],
 };
 
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: ORIGIN,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    credentials: true,
+  })
+);
 
 const mongoose = require("mongoose");
 const session = require("express-session");

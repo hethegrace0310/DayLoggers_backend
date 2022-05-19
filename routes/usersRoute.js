@@ -125,10 +125,7 @@ router.post(
     console.log(user);
     if (user) {
       req.session.userId = user._id;
-      // req.session.save(() => {
-      // console.log(req.session.userId);
       res.sendStatus(204);
-      // });
     } else {
       res.sendStatus(401);
     }
