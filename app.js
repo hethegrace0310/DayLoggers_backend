@@ -11,7 +11,7 @@ var corsOptions = {
   origin: [
     "http://localhost:3000",
     "https://628506e94c2cab2730c7ea4a--meek-boba-7ec9b8.netlify.app",
-    "https://meek-boba-7ec9b8.netlify.app/",
+    "https://meek-boba-7ec9b8.netlify.app",
   ],
 };
 
