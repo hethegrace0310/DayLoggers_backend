@@ -8,14 +8,13 @@ const { isLoggedIn, isAgent } = require("../middleware/auth");
 
 const { wrapAsync } = require("../utils/helper");
 
-//get qustion (날짜에 따라서)
 //get all
 router.get(
   "/questions",
   isAgent,
   wrapAsync(async function (req, res) {
     const questions = await Question.find({ user: req.session.userId }).sort({
-      lastUpdatedDate: -1,
+      date: -1,
     });
     // console.log(notes);
     res.json(questions);
@@ -34,10 +33,12 @@ router.get(
         return;
       } else {
         // The thrown error will be handled by the error handling middleware
-        throw new Error("Question Not Found");
+        // throw new Error("Question Not Found");
+        res.sendStatus(204);
       }
     } else {
-      throw new Error("Invalid Question Id");
+      // throw new Error("Invalid Question Id");
+      res.sendStatus(401);
     }
   })
 );
@@ -53,17 +54,10 @@ router.put(
     await Question.findByIdAndUpdate(
       id,
       {
-        user: req.body.userId,
         questionType: req.body.questionType,
         questionText: req.body.questionText,
         multipleChoice: req.body.multipleChoice,
-        date: req.body.date,
         responses: req.body.responses,
-        //   textTitle: req.body.textTitle,
-        //   lastUpdatedDate: req.body.lastUpdatedDate,
-        //   text: req.body.text,
-        //   tags: req.body.tags,
-        //   writer: req.session.userId,
       },
       { runValidators: true }
     );

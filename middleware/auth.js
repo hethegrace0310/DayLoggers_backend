@@ -13,7 +13,9 @@ module.exports.isAgent = wrapAsync(async (req, res, next) => {
   const id = req.params.id;
   const question = await Question.findById(id);
   if (question?.user && !question?.user.equals(req.session.userId)) {
-    throw new ExpressError("Not an authorized agent for this author", 401);
+    // throw new ExpressError("Not an authorized agent for this author", 401);
+    res.sendStatus(401);
+    return;
   }
   next();
 });
