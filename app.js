@@ -47,7 +47,7 @@ const sessionConfig = {
   cookie: {
     secure: true,
     httpOnly: true,
-    samesite: "none",
+    sameSite: "none",
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
     // later you would want to add: 'secure: true' once your website is hosted on HTTPS.
