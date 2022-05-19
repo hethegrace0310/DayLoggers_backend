@@ -53,7 +53,7 @@ router.post(
       questionType: req.body.questionType,
       questionText: req.body.questionText,
       multipleChoice: req.body.multipleChoice,
-      responses: req.body.responses,
+      responses: {},
       date: new Date(),
       user: req.session.userId,
     });
