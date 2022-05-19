@@ -43,6 +43,27 @@ router.get(
   })
 );
 
+//create question
+router.post(
+  "/questions",
+  wrapAsync(async function (req, res) {
+    // console.log("Posted with body: " + JSON.stringify(req.body));
+    let writer = req.session.userId;
+
+    const newQuestion = new Question({
+      questionType: req.body.questionType,
+      questionText: req.body.questionText,
+      multipleChoice: req.body.multipleChoice,
+      responses: req.body.responses,
+      date: new Date(),
+      user: req.session.userId,
+    });
+
+    await newQuestion.save();
+    res.json(newQuestion); //newNote object를 json 형식으로 바꿔서 보내준다.
+  })
+);
+
 //edit question
 router.put(
   "/questions/:id",
