@@ -1,8 +1,10 @@
 const express = require("express");
 const cors = require("cors");
-var session = require("express-session");
 const usersRoutes = require("./routes/usersRoute");
 const questionRoute = require("./routes/questionRoute");
+const session = require("express-session");
+const mongoose = require("mongoose");
+const MongoStore = require("connect-mongo"); // MongoDB session store
 
 const app = express();
 const bodyParser = require("body-parser");
@@ -22,10 +24,6 @@ app.use(
 
 app.use(bodyParser.json());
 app.set("trust proxy", 1);
-
-const mongoose = require("mongoose");
-const session = require("express-session");
-const MongoStore = require("connect-mongo"); // MongoDB session store
 
 const sessionSecret = "Haeun Park";
 
@@ -54,9 +52,9 @@ const sessionConfig = {
     secure: true,
     httpOnly: true,
     sameSite: "none",
-    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
     maxAge: 1000 * 60 * 60 * 24 * 7,
-    // domain: "https://meek-boba-7ec9b8.netlify.app",
+    domain: "https://meek-boba-7ec9b8.netlify.app",
     path: "/",
     // later you would want to add: 'secure: true' once your website is hosted on HTTPS.
   },
