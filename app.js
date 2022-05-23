@@ -3,6 +3,7 @@ const cors = require("cors");
 const usersRoutes = require("./routes/usersRoute");
 const questionRoute = require("./routes/questionRoute");
 const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo"); // MongoDB session store
 
@@ -21,6 +22,8 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(cookieParser());
 
 app.use(bodyParser.json());
 app.set("trust proxy", 1);
@@ -54,10 +57,10 @@ const sessionConfig = {
   secret: sessionSecret,
   resave: false,
   saveUninitialized: true,
-  secure: true,
-  httpOnly: true,
-  sameSite: "none",
   cookie: {
+    secure: true,
+    httpOnly: true,
+    sameSite: "none",
     expires: expirationDate,
     maxAge: 1000 * 60 * 60 * 24 * 7,
     domain: "netlify.app",
