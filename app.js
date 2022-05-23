@@ -1,4 +1,5 @@
 const express = require("express");
+const cookieSession = require("cookie-session");
 const cors = require("cors");
 const usersRoutes = require("./routes/usersRoute");
 const questionRoute = require("./routes/questionRoute");
@@ -14,6 +15,12 @@ const ORIGIN =
     ? "https://meek-boba-7ec9b8.netlify.app"
     : "http://localhost:3000";
 
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key1", "key2"],
+  })
+);
 app.use(
   cors({
     origin: ORIGIN,
@@ -57,7 +64,7 @@ const sessionConfig = {
   cookie: {
     secure: true,
     httpOnly: true,
-    sameSite: "None",
+    sameSite: "none",
     expires: expirationDate,
     maxAge: 1000 * 60 * 60 * 24 * 7,
     domain: "netlify.app",
