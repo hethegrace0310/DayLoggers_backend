@@ -61,7 +61,7 @@ const sessionConfig = {
     // sameSite: "none",
     expires: expirationDate,
     maxAge: 1000 * 60 * 60 * 24 * 7,
-    domain: "netlify.app",
+    // domain: "netlify.app",
     // later you would want to add: 'secure: true' once your website is hosted on HTTPS.
   },
 };
