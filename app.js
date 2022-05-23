@@ -3,7 +3,7 @@ const cors = require("cors");
 const usersRoutes = require("./routes/usersRoute");
 const questionRoute = require("./routes/questionRoute");
 const session = require("express-session");
-const cookieParser = require("cookie-parser");
+var cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo"); // MongoDB session store
 
