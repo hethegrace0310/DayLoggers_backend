@@ -130,7 +130,8 @@ router.post(
     console.log(user);
     if (user) {
       req.session.userId = user._id;
-      res.sendStatus(204);
+      console.log(user);
+      res.json(user);
     } else {
       res.sendStatus(401);
     }
