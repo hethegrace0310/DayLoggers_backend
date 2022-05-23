@@ -55,35 +55,6 @@ router.get(
 );
 
 //get current user
-// router.get(
-//   "/user/:id",
-//   wrapAsync(async function (req, res, next) {
-//     const id = req.params.id;
-//     // console.log(id);
-//     const _id = mongoose.Types.ObjectId(id); ///mongoose의 objectId형태로 바꿔줌
-//     if (mongoose.isValidObjectId(id)) {
-//       // const user = await User.findById(id);
-//       const user = await User.findOne({ _id: _id });
-//       if (user) {
-//         res.json(user);
-//         return;
-//       } else {
-//         throw new Error("User Not Found");
-//       }
-//     } else {
-//       throw new Error("Invalid user Id");
-//     }
-//   })
-// );
-
-// router.get(
-//   "/users",
-//   wrapAsync(async function (req, res, next) {
-//     const users = await User.find({});
-//     res.json(users);
-//   })
-// );
-
 router.put(
   "/user",
   wrapAsync(async function (req, res) {
