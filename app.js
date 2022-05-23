@@ -49,35 +49,35 @@ const store = MongoStore.create({
 
 const expirationDate = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7);
 
-// const sessionConfig = {
-//   store,
-//   name: "session",
-//   secret: sessionSecret,
-//   resave: false,
-//   saveUninitialized: false,
-//   cookie: {
+const sessionConfig = {
+  store,
+  name: "session",
+  secret: sessionSecret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: true,
+    httpOnly: true,
+    // sameSite: "none",
+    expires: expirationDate,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+    domain: "netlify.app",
+    // later you would want to add: 'secure: true' once your website is hosted on HTTPS.
+  },
+};
+
+app.use(session(sessionConfig));
+
+// app.use(
+//   cookieSession({
+//     name: "session",
+//     keys: [sessionSecret],
+//     maxAge: 1000 * 60 * 60 * 24 * 7,
 //     secure: true,
 //     httpOnly: true,
 //     sameSite: "none",
-//     expires: expirationDate,
-//     maxAge: 1000 * 60 * 60 * 24 * 7,
-//     domain: "netlify.app",
-//     // later you would want to add: 'secure: true' once your website is hosted on HTTPS.
-//   },
-// };
-
-// app.use(session(sessionConfig));
-
-app.use(
-  cookieSession({
-    name: "session",
-    keys: [sessionSecret],
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-    secure: true,
-    httpOnly: true,
-    sameSite: "none",
-  })
-);
+//   })
+// );
 
 app.use((req, res, next) => {
   req.requestTime = Date.now();
