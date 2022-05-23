@@ -28,16 +28,35 @@ router.post(
 router.get(
   "/user", //relative path
   wrapAsync(async function (req, res, next) {
-    // console.log(req);
-    const sess = req.session;
-    const id = sess.userId; //쿠키에 들어 있ㅡ seesion key를 기반으로 session에서 user id 가져옴
+    //   // console.log(req);
+    //   const sess = req.session;
+    //   const id = sess.userId; //쿠키에 들어 있ㅡ seesion key를 기반으로 session에서 user id 가져옴
 
-    if (!id) {
-      res.sendStatus(204);
-    }
+    //   if (!id) {
+    //     res.sendStatus(204);
+    //   }
+    //   if (mongoose.isValidObjectId(id)) {
+    //     //id가 mongoose에서 valid한지 검사
+    //     console.log(id);
+    //     const user = await User.findById(id);
+    //     if (user) {
+    //       res.json(user);
+    //       return;
+    //     } else {
+    //       // throw new Error("User Not Found");
+    //       res.sendStatus(404);
+    //     }
+    //   } else {
+    //     // throw new Error("Invalid user Id");
+    //     res.sendStatus(400);
+    //   }
+    //   return;
+    // })
+    // console.log(req);
+    const id = req.session.userId; //쿠키에 들어 있ㅡ seesion key를 기반으로 session에서 user id 가져옴
+    // console.log(req);
     if (mongoose.isValidObjectId(id)) {
       //id가 mongoose에서 valid한지 검사
-      console.log(id);
       const user = await User.findById(id);
       if (user) {
         res.json(user);
@@ -50,7 +69,6 @@ router.get(
       // throw new Error("Invalid user Id");
       res.sendStatus(400);
     }
-    return;
   })
 );
 
