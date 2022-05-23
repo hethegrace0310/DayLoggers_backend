@@ -47,7 +47,6 @@ const store = MongoStore.create({
 // mongoose.set("useFindAndModify", false);
 
 const expirationDate = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7);
-const maxAge = 1000 * 60 * 60 * 24 * 7;
 
 const sessionConfig = {
   store,
@@ -59,10 +58,9 @@ const sessionConfig = {
     secure: true,
     httpOnly: true,
     sameSite: "none",
-    expires: expirationDate,
-    maxAge: maxAge,
+    // expires: expirationDate,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
     domain: "meek-boba-7ec9b8.netlify.app",
-    path: "/",
     // later you would want to add: 'secure: true' once your website is hosted on HTTPS.
   },
 };
