@@ -3,7 +3,6 @@ const cors = require("cors");
 const usersRoutes = require("./routes/usersRoute");
 const questionRoute = require("./routes/questionRoute");
 const session = require("express-session");
-var cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo"); // MongoDB session store
 
@@ -22,8 +21,6 @@ app.use(
     credentials: true,
   })
 );
-
-app.use(cookieParser());
 
 app.use(bodyParser.json());
 app.set("trust proxy", 1);
@@ -82,9 +79,10 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Set-Cookie"
+    // "Origin, X-Requested-With, Content-Type, Accept, Set-Cookie"
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
-  res.header("Access-Control-Expose-Headers", "Set-Cookie");
+  // res.header("Access-Control-Expose-Headers", "Set-Cookie");
   next();
 });
 
