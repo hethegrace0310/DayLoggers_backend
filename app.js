@@ -60,7 +60,7 @@ const sessionConfig = {
     sameSite: "none",
     // expires: expirationDate,
     maxAge: 1000 * 60 * 60 * 24 * 7,
-    domain: "meek-boba-7ec9b8.netlify.app",
+    // domain: "meek-boba-7ec9b8.netlify.app",
     // later you would want to add: 'secure: true' once your website is hosted on HTTPS.
   },
 };
