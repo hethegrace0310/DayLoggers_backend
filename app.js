@@ -3,6 +3,7 @@ const cors = require("cors");
 const usersRoutes = require("./routes/usersRoute");
 const questionRoute = require("./routes/questionRoute");
 const session = require("express-session");
+var cookieSession = require("cookie-session");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo"); // MongoDB session store
 
@@ -48,25 +49,35 @@ const store = MongoStore.create({
 
 const expirationDate = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7);
 
-const sessionConfig = {
-  store,
-  name: "session",
-  secret: sessionSecret,
-  resave: false,
-  saveUninitialized: false,
-  proxy: true,
-  cookie: {
+// const sessionConfig = {
+//   store,
+//   name: "session",
+//   secret: sessionSecret,
+//   resave: false,
+//   saveUninitialized: false,
+//   cookie: {
+//     secure: true,
+//     httpOnly: true,
+//     sameSite: "none",
+//     expires: expirationDate,
+//     maxAge: 1000 * 60 * 60 * 24 * 7,
+//     domain: "netlify.app",
+//     // later you would want to add: 'secure: true' once your website is hosted on HTTPS.
+//   },
+// };
+
+// app.use(session(sessionConfig));
+
+app.use(
+  cookieSession({
+    name: "session",
+    keys: [sessionSecret],
+    maxAge: 1000 * 60 * 60 * 24 * 7,
     secure: true,
     httpOnly: true,
     sameSite: "none",
-    expires: expirationDate,
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-    domain: "netlify.app",
-    // later you would want to add: 'secure: true' once your website is hosted on HTTPS.
-  },
-};
-
-app.use(session(sessionConfig));
+  })
+);
 
 app.use((req, res, next) => {
   req.requestTime = Date.now();
