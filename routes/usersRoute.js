@@ -31,9 +31,11 @@ router.get(
     // console.log(req);
     const id = req.session.userId; //쿠키에 들어 있ㅡ seesion key를 기반으로 session에서 user id 가져옴
     console.log("req.session", req.session);
-    console.log("req", req);
-    // console.log(req);
-    if (!id) res.sendStatus(403);
+    console.log("id", req.session.userId);
+    console.log("_id", req.session._id);
+    if (!id) {
+      res.sendStatus(204);
+    }
     if (mongoose.isValidObjectId(id)) {
       //id가 mongoose에서 valid한지 검사
       console.log(id);
