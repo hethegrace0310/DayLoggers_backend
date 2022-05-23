@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const usersRoutes = require("./routes/usersRoute");
-// const notesRoutes = require("./routes/notesRoute");
 const questionRoute = require("./routes/questionRoute");
 
 const app = express();
@@ -81,12 +80,8 @@ app.use(function (req, res, next) {
   next();
 });
 
-// const backendURL = "https://cse316final.herokuapp.com";
-
 app.use("/api", usersRoutes);
 app.use("/api", questionRoute);
-// app.use(`${backendURL}/api`, usersRoutes);
-// app.use(`${backendURL}/api`, questionRoute);
 
 app.use((err, req, res, next) => {
   console.log("Error handling called " + err);
