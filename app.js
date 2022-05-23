@@ -58,6 +58,7 @@ const sessionConfig = {
     secure: true,
     httpOnly: true,
     sameSite: "none",
+    secret: "youtSecret",
     expires: expirationDate,
     maxAge: 1000 * 60 * 60 * 24 * 7,
     domain: "netlify.app",
