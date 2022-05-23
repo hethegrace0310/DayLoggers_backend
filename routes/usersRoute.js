@@ -95,8 +95,8 @@ router.put(
       {
         name: req.body.name,
         email: req.body.email,
-        colorScheme: colorScheme,
         profileImage: req.body.profileImage,
+        address: req.body.address,
       },
       { runValidators: true }
     );
@@ -130,10 +130,10 @@ router.post(
     if (user) {
       req.session.userId = user._id;
       console.log(user);
-      res.json(user);
     } else {
       res.sendStatus(401);
     }
+    res.json(user);
   })
 );
 
