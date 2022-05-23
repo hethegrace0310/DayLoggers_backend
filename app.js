@@ -53,7 +53,7 @@ const sessionConfig = {
   name: "session",
   secret: sessionSecret,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     secure: true,
     httpOnly: true,
@@ -79,10 +79,9 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
   res.header(
     "Access-Control-Allow-Headers",
-    // "Origin, X-Requested-With, Content-Type, Accept, Set-Cookie"
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept, Set-Cookie"
   );
-  // res.header("Access-Control-Expose-Headers", "Set-Cookie");
+  res.header("Access-Control-Expose-Headers", "Set-Cookie");
   next();
 });
 
