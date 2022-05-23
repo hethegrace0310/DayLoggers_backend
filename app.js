@@ -57,8 +57,8 @@ const sessionConfig = {
   cookie: {
     secure: true,
     httpOnly: true,
-    sameSite: "none",
-    // expires: expirationDate,
+    sameSite: false,
+    expires: expirationDate,
     maxAge: 1000 * 60 * 60 * 24 * 7,
     // domain: "meek-boba-7ec9b8.netlify.app",
     // later you would want to add: 'secure: true' once your website is hosted on HTTPS.
