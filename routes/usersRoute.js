@@ -30,6 +30,8 @@ router.get(
   wrapAsync(async function (req, res, next) {
     // console.log(req);
     const id = req.session.userId; //쿠키에 들어 있ㅡ seesion key를 기반으로 session에서 user id 가져옴
+    console.log("req.session", req.session);
+    console.log("req", req);
     // console.log(req);
     if (!id) res.sendStatus(403);
     if (mongoose.isValidObjectId(id)) {
