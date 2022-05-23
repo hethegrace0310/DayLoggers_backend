@@ -103,6 +103,7 @@ router.put(
 router.post(
   "/register",
   wrapAsync(async function (req, res) {
+    console.log("a");
     const { password, email, name } = req.body;
     const user = new User({
       email,
@@ -112,8 +113,10 @@ router.post(
       address: "",
     });
     await user.save();
+    console.log("b");
     req.session.userId = user._id;
     res.json(user);
+    console.log("c");
   })
 );
 
