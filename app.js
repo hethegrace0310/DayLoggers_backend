@@ -30,7 +30,11 @@ const sessionSecret = "Haeun Park";
 var dbURL =
   process.env.MONGO_URL ||
   "mongodb+srv://cse316final:1234567890@cse316final.oxq7w.mongodb.net/test"; // insert your database URL here
-mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+mongoose.connect(dbURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
@@ -54,7 +58,7 @@ const sessionConfig = {
     sameSite: "none",
     expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
     maxAge: 1000 * 60 * 60 * 24 * 7,
-    domain: "https://meek-boba-7ec9b8.netlify.app",
+    // domain: "https://meek-boba-7ec9b8.netlify.app",
     path: "/",
     // later you would want to add: 'secure: true' once your website is hosted on HTTPS.
   },
