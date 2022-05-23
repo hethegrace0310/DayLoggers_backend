@@ -34,6 +34,7 @@ router.get(
     if (!id) res.sendStatus(403);
     if (mongoose.isValidObjectId(id)) {
       //id가 mongoose에서 valid한지 검사
+      console.log(id);
       const user = await User.findById(id);
       if (user) {
         res.json(user);
