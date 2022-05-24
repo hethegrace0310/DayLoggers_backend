@@ -10,21 +10,21 @@ const MongoStore = require("connect-mongo"); // MongoDB session store
 const app = express();
 const bodyParser = require("body-parser");
 
-const ORIGIN =
-  process.env.NODE_ENV === "production"
-    ? "https://meek-boba-7ec9b8.netlify.app"
-    : "http://localhost:3000";
+// const ORIGIN =
+//   process.env.NODE_ENV === "production"
+//     ? "https://meek-boba-7ec9b8.netlify.app"
+//     : "http://localhost:3000";
 
-app.use(
-  cors({
-    origin: ORIGIN,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: ORIGIN,
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+//     credentials: true,
+//   })
+// );
 
 app.use(bodyParser.json());
-app.set("trust proxy", 1);
+// app.set("trust proxy", 1);
 
 const sessionSecret = "Haeun Park";
 
