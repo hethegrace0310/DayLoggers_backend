@@ -113,7 +113,7 @@ router.post(
 router.post(
   "/login",
   wrapAsync(async function (req, res) {
-    const { password, email } = req.body;
+    const { email, password } = req.body;
     const user = await User.findAndValidate(email, password);
     console.log(user);
     if (user) {
