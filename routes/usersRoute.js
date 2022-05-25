@@ -115,14 +115,14 @@ router.post(
   wrapAsync(async function (req, res) {
     const { password, email } = req.body;
     const user = await User.findAndValidate(email, password);
-    console.log(user);
+    // console.log(user);
     if (user) {
       req.session.userId = user._id;
       console.log(user);
+      res.json(user);
     } else {
       res.sendStatus(401);
     }
-    res.json(user);
   })
 );
 
