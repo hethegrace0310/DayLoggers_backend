@@ -13,9 +13,11 @@ router.get(
   "/questions",
   isAgent,
   wrapAsync(async function (req, res) {
-    const questions = await Question.find({ user: req.session.userId }).sort({
+    const questions = await Question.find({ user: req.session.userId })
+    .sort({
       date: -1,
-    });
+    })
+    ;
     // console.log(notes);
     res.json(questions);
   })
@@ -91,9 +93,7 @@ router.delete(
   isAgent,
   wrapAsync(async function (req, res) {
     const id = req.params.id;
-    const result = await Question.findByIdAndDelete(
-      mongoose.Types.ObjectId(id)
-    );
+    const result = await Question.findByIdAndDelete(id);
     console.log("Deleted successfully: " + result);
     res.json(result);
   })

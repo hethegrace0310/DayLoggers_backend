@@ -6,7 +6,6 @@ const session = require("express-session");
 // var cookieSession = require("cookie-session");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo"); // MongoDB session store
-
 const app = express();
 const bodyParser = require("body-parser");
 
