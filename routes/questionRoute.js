@@ -66,16 +66,10 @@ router.post(
 );
 
 //edit question
-router.put(
-  "/questions/:id",
-  isAgent,
-  wrapAsync(async function (req, res) {
+router.put("/questions/:id",  isAgent,  wrapAsync(async function (req, res) {
     const id = req.params.id;
-    // console.log("PUT with id: " + id + ", body: " + JSON.stringify(req.body));
-
-    await Question.findByIdAndUpdate(
-      id,
-      {
+    console.log("PUT with id: " + id + ", body: " + JSON.stringify(req.body));
+    await Question.findByIdAndUpdate(id, {
         questionType: req.body.questionType,
         questionText: req.body.questionText,
         multipleChoice: req.body.multipleChoice,
@@ -83,9 +77,11 @@ router.put(
       },
       { runValidators: true }
     );
+    console.log("Added in server");
     res.sendStatus(204);
   })
 );
+
 
 //delete questions
 router.delete(
