@@ -13,11 +13,9 @@ router.get(
   "/questions",
   isAgent,
   wrapAsync(async function (req, res) {
-    const questions = await Question.find({ user: req.session.userId })
-    .sort({
+    const questions = await Question.find({ user: req.session.userId }).sort({
       date: -1,
-    })
-    ;
+    });
     // console.log(notes);
     res.json(questions);
   })
@@ -70,14 +68,19 @@ router.post(
 );
 
 //edit question
-router.put("/questions/:id",  isAgent,  wrapAsync(async function (req, res) {
+router.put(
+  "/questions/:id",
+  isAgent,
+  wrapAsync(async function (req, res) {
     const id = req.params.id;
     console.log("PUT with id: " + id + ", body: " + JSON.stringify(req.body));
-    await Question.findByIdAndUpdate(id, {
+    await Question.findByIdAndUpdate(
+      id,
+      {
         questionType: req.body.questionType,
         questionText: req.body.questionText,
         multipleChoice: req.body.multipleChoice,
-        responses: req.body.responses,
+        responses: req.body.responses || {},
       },
       { runValidators: true }
     );
@@ -85,7 +88,6 @@ router.put("/questions/:id",  isAgent,  wrapAsync(async function (req, res) {
     res.sendStatus(204);
   })
 );
-
 
 //delete questions
 router.delete(

@@ -31,6 +31,10 @@ var UserSchema = new Schema({
   address: {
     type: [Object],
   },
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 UserSchema.statics.findAndValidate = async function (email, password) {
