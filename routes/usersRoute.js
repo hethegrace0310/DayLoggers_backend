@@ -79,6 +79,7 @@ router.delete(
   wrapAsync(async function (req, res) {
     const id = req.params.id;
     const result = await User.findByIdAndDelete(id);
+    const questionResult = await Question.deleteMany({ user: id });
     console.log("Deleted successfully: " + result);
     res.json(result);
   })
