@@ -18,7 +18,12 @@ var UserSchema = new Schema({
   password: {
     type: String,
     required: true,
-    minlength: 6,
+    minlength: 8,
+    validate: {
+      validator: validator.validatePassword,
+      message: () =>
+        "Password must have at least 1 number, 1 lower, 1 uppercase letter and at least 8 characters",
+    },
   },
   profileImage: {
     type: String,

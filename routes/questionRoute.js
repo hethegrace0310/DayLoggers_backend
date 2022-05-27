@@ -27,7 +27,11 @@ router.get(
   "/questions/:id",
   isAgent,
   wrapAsync(async function (req, res, next) {
+    console.log(req);
+    console.log(req.params);
+    console.log(id);
     let id = req.params.id;
+
     if (mongoose.isValidObjectId(id)) {
       const question = await Question.findById(id);
       if (question) {
