@@ -52,7 +52,6 @@ router.post(
   "/questions",
   wrapAsync(async function (req, res) {
     // console.log("Posted with body: " + JSON.stringify(req.body));
-    let writer = req.session.userId;
     const newQuestion = new Question({
       questionType: req.body.questionType,
       questionText: req.body.questionText,
