@@ -1,29 +1,15 @@
 const express = require("express");
-// const cors = require("cors");
 const usersRoutes = require("./routes/usersRoute");
 const questionRoute = require("./routes/questionRoute");
 const session = require("express-session");
-// var cookieSession = require("cookie-session");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo"); // MongoDB session store
 const app = express();
 const bodyParser = require("body-parser");
 
-// const ORIGIN =
-//   process.env.NODE_ENV === "production"
-//     ? "https://meek-boba-7ec9b8.netlify.app"
-//     : "http://localhost:3000";
-
-// app.use(
-//   cors({
-//     origin: ORIGIN,
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-//     credentials: true,
-//   })
-// );
 
 app.use(bodyParser.json());
-// app.set("trust proxy", 1);
+
 
 const sessionSecret = "Haeun Park";
 
@@ -44,7 +30,6 @@ const store = MongoStore.create({
   touchAfter: 24 * 60 * 60,
 });
 
-// mongoose.set("useFindAndModify", false);
 
 const expirationDate = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7);
 
@@ -67,34 +52,11 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 
-// app.use(
-//   cookieSession({
-//     name: "session",
-//     keys: [sessionSecret],
-//     maxAge: 1000 * 60 * 60 * 24 * 7,
-//     secure: true,
-//     httpOnly: true,
-//     sameSite: "none",
-//   })
-// );
-
 app.use((req, res, next) => {
   req.requestTime = Date.now();
   console.log(req.method, req.path);
   next();
 });
-
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", ORIGIN);
-//   res.header("Access-Control-Allow-Credentials", true);
-//   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept, Set-Cookie"
-//   );
-//   res.header("Access-Control-Expose-Headers", "Set-Cookie");
-//   next();
-// });
 
 app.use("/api", usersRoutes);
 app.use("/api", questionRoute);

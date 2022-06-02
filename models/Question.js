@@ -7,9 +7,7 @@ var QuestionSchema = new Schema({
   questionType: {type: String,},
   multipleChoice: { type:[String] },
   date: { type: Date, default: new Date()},
-  // responses: {type: String},
   responses: { type: Schema.Types.Map, default: {}}, 
-  //{"date":"responses"} -> ex){"2022-01-02":"String으로 때려박기"}
   user: { type: Schema.Types.ObjectId, ref: "User", required: true }
 });
 
