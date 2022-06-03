@@ -60,11 +60,13 @@ router.get(
     const returnUsers = await Promise.all(
       users.map(async function (user) {
         const questions = await Question.find({ user: user._id });
-        console.log(questions);
-        const responses = questions.map((q) => Object.keys(q.responses).length);
-        // console.log(responses);
+        console.log("questions", questions);
+        const responses = questions.map(
+          (q) => Object.keys(q.responses.toJSON()).length
+        );
+        console.log("responses", responses);
         const sum = responses.reduce((a, c) => a + c, 0);
-        // console.log(sum);
+        console.log("sum", sum);
         return { ...user._doc, questions: questions.length, responses: sum };
       })
     );
