@@ -45,7 +45,17 @@ UserSchema.statics.findAndValidate = async function (email, password) {
   const isValid = await bcrypt.compare(password, user.password);
   return isValid ? user : false;
 };
+//
+UserSchema.statics.findAdmin = async function (email, isAdmin) {
+  const user = await this.findOne({ email });
+  if (!user) {
+    return false;
+  }
+  const isValid = await compare(isAdmin, user.isAdmin);
+  return isValid ? user : false;
+};
 
+//
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   this.password = await bcrypt.hash(this.password, 10);
